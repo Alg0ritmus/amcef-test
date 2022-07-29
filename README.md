@@ -1,7 +1,7 @@
 # amcef-test
 
 ## URLS:
-
+---------------------------------------------------------------------
 'admin/'                      | admin dashboard (default django) <br>
 'api/'                        | main page <br>
 'api/posts/'                  | get all Posts from API <br>
