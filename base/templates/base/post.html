@@ -1,0 +1,29 @@
+{% extends "./home.html" %}
+
+
+{% block body%}
+
+{% if myUpladeForm%}
+<div class="container justify-content-center">
+    <form action="{% url 'base:createPost'%}" method="post">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+        {{myUpladeForm|crispy}}
+        <input type="submit" class="btn btn-primary" value="Submit!">
+    </form>
+</div>
+{% endif %}
+
+{% if myUPDATEform %}
+<div class="container justify-content-center">
+    <form action="{% url 'base:updatePost' myUPDATEform_id %}" method="post">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+        {{myUPDATEform|crispy}}
+        
+        <input type="submit" class="btn btn-primary" value="Submit!">
+
+    </form>
+</div>
+{% endif %}
+{% endblock %}

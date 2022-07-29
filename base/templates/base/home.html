@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% block bs %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'base/styles.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">AMCEF-test</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class ="nav navbar-nav to-the-middle" style="width:90%;">
+                <li>
+                    <div>
+                        <input class="byidclass" type="text" placeholder="Get post by id..."></input>
+                        <input type="submit" class="btn btn-primary navbar-btn" value="Get By ID" onclick="getpostbyid('byidclass')"></input>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <input class="byuseridclass" type="text" placeholder="Get post by userID..."></input>
+                        <input type="submit" class="btn btn-primary navbar-btn" value="Get By userId" onclick="getpostbyuserid('byuseridclass')"></input>
+                    </div>
+                </li>
+                <li>
+                    <div style="height: 100%; display: flex; align-items: center;">
+                        <a href="{% url 'base:createPost' %}" class="btn btn-warning mybtn" >Create post</a>
+                    </div>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+     
+    {% block body %}
+    {% if postById %}
+    <div class="container justify-content-center">
+        <div class="panel panel-success" style="margin:2em;">
+            <div class="panel-heading">{{postById.id}}.) {{postById.title}}</div>
+            <div class="panel-body">{{postById.body}}<br>
+                <span style="color:cornflowerblue">userID:{{postById.userId}}</span>
+            </div>
+            <div style="margin: 1em;">
+                <a href="{% url 'base:updatePost' postById.id %}" class="btn btn-outline-primary">Update</a>
+                <a href="{% url 'base:deletePost' postById.id %}" class="btn btn-outline-dark">Delete</a>
+            </div>
+        </div>
+    </div>
+    
+    {% endif %}
+
+    <div class="container justify-content-center">
+        {% for post in data%}
+        <div class="panel panel-info" style="margin:2em;">
+            <div class="panel-heading">{{post.id}}.) {{post.title}}</div>
+            <div class="panel-body">{{post.body}}<br>
+            <span style="color:cornflowerblue">userID:{{post.userId}}</span></div>
+            <div style="margin: 1em;">
+                <a href="{% url 'base:updatePost' post.id %}" class="btn btn-outline-primary">Update</a>
+                <a href="{% url 'base:deletePost' post.id %}" class="btn btn-outline-dark">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+
+    
+    {% if all_posts%}
+    <div class="container justify-content-center">
+        <h1>Posts in local DB:</h1>
+        {% for post in all_posts%}
+        <div class="panel panel-info" style="margin:2em;">
+            <div class="panel-heading">{{post.id}}.) {{post.title}}</div>
+            <div class="panel-body">{{post.body}}<br>
+            <span style="color:cornflowerblue">userID:{{post.userId}}</span></div>
+            <div style="margin: 1em;">
+                <a href="{% url 'base:updatePost' post.id %}" class="btn btn-outline-primary">Update</a>
+                <a href="{% url 'base:deletePost' post.id %}" class="btn btn-outline-dark">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+    <script>
+        var getpostbyid = (idofsearch) =>{
+            var valueToSearch  = document.getElementsByClassName(idofsearch)[0].value;
+            var url=(window.origin+"/api/post/"+valueToSearch);
+            window.location.replace(url);
+
+        }
+
+        var getpostbyuserid = (idofsearch) =>{
+            var valueToSearch  = document.getElementsByClassName(idofsearch)[0].value;
+            var url=(window.origin+"/api/getPostByUsedId/"+valueToSearch);
+            window.location.replace(url);
+
+        }
+    </script>
+</body>
+</html>
