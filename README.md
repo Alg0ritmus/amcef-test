@@ -5,11 +5,11 @@
 'admin/'                      -> admin dashboard (default django) <br>
 'api/'                        -> main page <br>
 'api/posts/'                  -> get all Posts from API <br>
-'api/post/<int>/'             -> get Post by it's ID <br>
-'api/updatePost/<int>/'       -> update Post <br>
-'api/getPostByUsedId/<int>/'  -> get Post by User ID <br>
+'api/post/\<int\>/'             -> get Post by it's ID <br>
+'api/updatePost/\<int\>/'       -> update Post <br>
+'api/getPostByUsedId/\<int\>/'  -> get Post by User ID <br>
 'api/createPost/'             -> create Post <br>
-'api/deletePost/<int>/'       -> delete Post <br>
+'api/deletePost/\<int\>/'       -> delete Post <br>
 
 ---
 ## Simple Info
