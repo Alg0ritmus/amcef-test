@@ -13,7 +13,8 @@
 
 ---
 ## Simple Info
-APP is available on url: http://127.0.0.1:8000/api/ (locally -> py manage.py runserver).<br>
+APP is available on url: http://127.0.0.1:8000/api/ (locally -> py manage.py runserver)<br>
+or as demo app (https://amcef-test.herokuapp.com/api/).<br>
 Main page contains 2 buttons (`Get By ID` & `Get By userId`) with associated fields and <br>
 1 button for Post creation.<br><br>
 
